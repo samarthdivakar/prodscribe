@@ -27,6 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Server**: Running successfully on port 3001
 - **Dependencies**: Installed class-validator, class-transformer, @nestjs/config, openai
 
+### Frontend-Backend Integration Log
+- **API Integration**: Updated `frontend/src/lib/api.ts` to call backend endpoint
+- **Form Enhancement**: Added error handling, loading states, and validation
+- **Error Handling**: Implemented try-catch with user-friendly error messages
+- **Loading States**: Added spinner animation during API calls
+- **Console Logging**: Added debug logs for successful requests and errors
+- **Data Transformation**: Convert features array to string for API compatibility
+- **CORS**: Backend CORS enabled for frontend communication
+- **Testing Scenarios**: Ready for testing valid data, empty fields, and server errors
+
 ### Changed
 
 ### Deprecated

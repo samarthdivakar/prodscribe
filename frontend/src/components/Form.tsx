@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { generateDescription } from '@/lib/api';
 
 interface FormData {
   productName: string;
@@ -20,10 +21,47 @@ export default function Form({ onSubmit, isLoading = false }: FormProps) {
     features: [''],
     tone: 'professional',
   });
+  
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    setError(null);
+    
+    // Validate form data
+    if (!formData.productName.trim()) {
+      setError('Product name is required');
+      return;
+    }
+    
+    if (!formData.features.some(f => f.trim())) {
+      setError('At least one feature is required');
+      return;
+    }
+
+    try {
+      // Convert features array to string for API
+      const featuresString = formData.features.filter(f => f.trim()).join(', ');
+      
+      console.log('Submitting form data:', {
+        productName: formData.productName,
+        features: featuresString,
+        tone: formData.tone
+      });
+
+      const description = await generateDescription({
+        productName: formData.productName,
+        features: featuresString,
+        tone: formData.tone,
+      });
+
+      console.log('Successfully generated description:', description);
+      
+      onSubmit(formData);
+    } catch (err) {
+      console.error('Error generating description:', err);
+      setError(err instanceof Error ? err.message : 'Failed to generate description');
+    }
   };
 
   const addFeature = () => {
@@ -55,6 +93,16 @@ export default function Form({ onSubmit, isLoading = false }: FormProps) {
       className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg"
     >
       <h2 className="text-2xl font-bold text-gray-900 mb-6">Generate Product Description</h2>
+      
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md"
+        >
+          <p className="text-red-700 text-sm">{error}</p>
+        </motion.div>
+      )}
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -127,7 +175,14 @@ export default function Form({ onSubmit, isLoading = false }: FormProps) {
           whileTap={{ scale: 0.98 }}
           className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
         >
-          {isLoading ? 'Generating...' : 'Generate Description'}
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+              Generating...
+            </div>
+          ) : (
+            'Generate Description'
+          )}
         </motion.button>
       </form>
     </motion.div>

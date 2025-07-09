@@ -19,16 +19,24 @@ export default function HomePage() {
   const handleSubmit = async (data: FormData) => {
     setIsLoading(true);
     try {
-      const response = await generateDescription(data);
+      // Convert features array to string for API
+      const featuresString = data.features.filter(f => f.trim()).join(', ');
+      
+      const description = await generateDescription({
+        productName: data.productName,
+        features: featuresString,
+        tone: data.tone,
+      });
+      
       setResult({
         title: `Description for ${data.productName}`,
-        description: response.description,
+        description: description,
       });
     } catch (error) {
-      console.error('Error generating description:', error);
+      console.error('Error in handleSubmit:', error);
       setResult({
         title: 'Error',
-        description: 'Failed to generate description. Please try again.',
+        description: error instanceof Error ? error.message : 'Failed to generate description. Please try again.',
       });
     } finally {
       setIsLoading(false);
