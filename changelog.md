@@ -1,0 +1,57 @@
+# 📝 Changelog
+
+All notable changes to Prodscribe will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Initial project scaffold
+- Monorepo structure with frontend and backend
+- Docker Compose configuration
+- Basic documentation
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.1.0] - 2024-01-XX
+
+### Added
+- Project initialization
+- Basic folder structure
+- Development environment setup
+- Docker configuration
+- GitHub Actions workflows (placeholder)
+- Kubernetes manifests (placeholder)
+
+---
+
+## Version History
+
+- **0.1.0** - Initial project scaffold and monorepo setup
+
+## Contributing
+
+When adding new features or making changes, please update this changelog with:
+
+1. The type of change (Added, Changed, Deprecated, Removed, Fixed, Security)
+2. A brief description of the change
+3. The date of the change
+
+### Change Types
+
+- **Added** for new features
+- **Changed** for changes in existing functionality
+- **Deprecated** for soon-to-be removed features
+- **Removed** for now removed features
+- **Fixed** for any bug fixes
+- **Security** in case of vulnerabilities 
