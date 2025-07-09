@@ -184,3 +184,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Made with ❤️ by the Prodscribe team 
+
+## 🚀 CI/CD Status
+
+![Frontend](https://github.com/samarthdivakar/prodscribe/actions/workflows/frontend.yml/badge.svg)
+![Backend](https://github.com/samarthdivakar/prodscribe/actions/workflows/backend.yml/badge.svg) 
